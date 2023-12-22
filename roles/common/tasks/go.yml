@@ -14,8 +14,7 @@
       go mod init {{ component }}
       go get
       go build
-    args:
-      chdir: /app
+  chdir: /app
 
 - name: SystemD Setup
   ansible.builtin.import_tasks:
