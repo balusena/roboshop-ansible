@@ -1,15 +1,9 @@
-- name: Fetch and Execute Erlang repo configuration script
-  ansible.builtin.command:
-    cmd: "curl -s https://packagecloud.io/install/repositories/rabbitmq/script.rpm.sh -o /tmp/rabbitmq_erlang_script.sh && bash /tmp/rabbitmq_erlang_script.sh"
-  args:
-    creates: /etc/yum.repos.d/rabbitmq_erlang.repo
+- name: Configure Erlang repos
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/script.rpm.sh | bash
 
-- name: Fetch and Execute RabbitMQ repo configuration script
-  ansible.builtin.command:
-    cmd: "curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh -o /tmp/rabbitmq_server_script.sh && bash /tmp/rabbitmq_server_script.sh"
-  args:
-    creates: /etc/yum.repos.d/rabbitmq_server.repo
-
+- name: Configure RabbitMQ repos
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+  
 - name: Install RabbitMQ Server
   ansible.builtin.yum:
     name: rabbitmq-server
@@ -23,12 +17,11 @@
 
 - name: Add Application User
   community.rabbitmq.rabbitmq_user:
-    user: roboshop
+    user: roboshop 
     password: roboshop123
     vhost: /
     configure_priv: .*
     read_priv: .*
     write_priv: .*
     state: present
-
 
