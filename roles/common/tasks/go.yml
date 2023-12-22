@@ -10,12 +10,9 @@
 - name: Install Go Dependencies
   ansible.builtin.shell:
     cmd: |
-      cd /app
-      go mod init {{ component }}
-      go get
-      go build
-  chdir: /app
+      cd /app && go mod init {{ component }} && go get && go build
 
 - name: SystemD Setup
   ansible.builtin.import_tasks:
     file: systemd_setup.yml
+
