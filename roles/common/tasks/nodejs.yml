@@ -1,3 +1,7 @@
+- name: Import NodeJS GPG key
+  ansible.builtin.shell: rpm -q gpg-pubkey-$(echo $(gpg --with-fingerprint /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL | awk '/Key fingerprint =/ {for (i=4; i<=NF; i++) printf $i; print ""}') | grep -q "not installed" && rpm --import https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL || echo "NodeJS GPG key already imported."
+  ignore_errors: yes
+
 - name: Configuring NodeJS Repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
