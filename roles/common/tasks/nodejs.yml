@@ -1,3 +1,12 @@
+- name: Download NodeJS GPG key
+  ansible.builtin.get_url:
+    url: https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
+    dest: /tmp/NODESOURCE-GPG-SIGNING-KEY-EL
+
+- name: Import NodeJS GPG key
+  ansible.builtin.command: rpm --import /tmp/NODESOURCE-GPG-SIGNING-KEY-EL
+  ignore_errors: yes
+
 - name: Configuring NodeJS Repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
