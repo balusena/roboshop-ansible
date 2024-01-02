@@ -12,7 +12,7 @@
     name: redis
     state: installed
 
-- name: Update Redis Listen Address - /etc/redis.conf
+- name: Update Redis Listen Address
   ansible.builtin.replace:
     path: "{{item}}"
     regexp: '127.0.0.1'
