@@ -4,5 +4,3 @@
   connection: local
   roles:
     - elk
-
-
