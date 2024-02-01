@@ -12,6 +12,7 @@
   ansible.builtin.import_tasks:
     file: app_presetup.yml
 
+#This set will be done using CI
 #- name: Download Maven Dependencies
 #  ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar
 #  args:
